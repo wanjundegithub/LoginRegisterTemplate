@@ -17,10 +17,11 @@
                 <Setter Property="Background" Value="#FF00A0FF"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="5"/>
+                <Setter Property="BorderBrush" Value="#FF00A0FF"/>
                 <Setter Property="Template">
                     <Setter.Value >
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border  Background="{TemplateBinding Background}" BorderBrush="#FF00A0FF" BorderThickness="2" CornerRadius="4">
+                            <Border  Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" CornerRadius="4">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -29,7 +30,12 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Setter Property="Background" Value="#FF0078FF"/>
-                    </Trigger> 
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="Background" Value="Gray"/>
+                        <Setter Property="Foreground" Value="LightGray"/>
+                    </Trigger>
                 </Style.Triggers>
             </Style>
 
@@ -37,6 +43,7 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="Height" Value="32"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <!--<Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBox}">
@@ -49,7 +56,7 @@
             </Style>
 
             <Style x:Key="PasswordBox_Style" TargetType="PasswordBox" BasedOn="{StaticResource MahApps.Styles.PasswordBox.Button.Revealed}">
-                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="Height" Value="32"/>
                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>

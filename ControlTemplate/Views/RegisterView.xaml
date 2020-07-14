@@ -15,7 +15,7 @@
     <controls:MetroWindow.Background>
         <ImageBrush ImageSource="../Resources/RegisterBackground.jpg"   Stretch="Fill"/>
     </controls:MetroWindow.Background>
-    <Grid >
+    <Grid x:Name="Parent_Grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -31,11 +31,19 @@
             <Label Content="Wonderful Journey" FontStyle="Italic" HorizontalAlignment="Center"  FontSize="20" Foreground="AliceBlue" Margin="5"/>
         </Grid>
         <Label Content="Account" Grid.Row="1"  FontStyle="Italic" HorizontalAlignment="Center"  FontSize="18" Foreground="AliceBlue" Margin="5"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Account,Mode=TwoWay}"  Style="{StaticResource TextBox_Style}" />
-        <Label Content="Password" Grid.Row="2"  FontStyle="Italic" HorizontalAlignment="Center"  FontSize="18" Foreground="AliceBlue" Margin="5" />
-        <PasswordBox x:Name="PasswordBox_Password"  Grid.Row="2" Grid.Column="2" Style="{StaticResource  PasswordBox_Style}">
+        <TextBox x:Name="TextBox_Account" Grid.Row="1" Grid.Column="1"   
+                   Style="{StaticResource TextBox_Style}" >
             <i:Interaction.Behaviors>
-                <Behaviors:PasswordBehavior Password="{Binding PassWord,Mode=TwoWay}"/>
+                <Behaviors:BorderBehavior x:Name="BorderBehavior_Account" />
+                <Behaviors:ShowErrorsBehavior x:Name="ShowErrorsBehavior_Account"  />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label Content="Password" Grid.Row="2"  FontStyle="Italic" HorizontalAlignment="Center"  FontSize="18" Foreground="AliceBlue" Margin="5" />
+        <PasswordBox x:Name="PasswordBox_Password"  Grid.Row="2" Grid.Column="2" Style="{StaticResource  PasswordBox_Style}" >
+            <i:Interaction.Behaviors>
+                <Behaviors:PasswordBehavior x:Name="PasswordBehavior_Password" />
+                <Behaviors:BorderBehavior x:Name="BorderBehavior_Password"/>
+                <Behaviors:ShowErrorsBehavior x:Name="ShowErrorsBehavior_Password"/>
             </i:Interaction.Behaviors>
         </PasswordBox>
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
@@ -44,9 +52,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Login" Command="{Binding LoginCommand}" Style="{StaticResource Button_Style}"/>
-            <Button Content="Register" Grid.Column="1"  Command="{Binding RegisterCommand}" Style="{StaticResource Button_Style}"/>
-            <Button Content="Exit" Grid.Column="2" Command="{Binding CloseCommand}" Style="{StaticResource Button_Style}" />
+            <Button x:Name="Button_Login" Content="Login" Style="{StaticResource Button_Style}" />
+            <Button x:Name="Button_Register" Content="Register" Grid.Column="1"  Style="{StaticResource Button_Style}"/>
+            <Button x:Name="Button_Exit" Content="Exit" Grid.Column="2"  Style="{StaticResource Button_Style}" />
 
         </Grid>
     </Grid>

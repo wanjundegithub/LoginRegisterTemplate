@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using ControlTemplate.Interfaces;
-using ControlTemplate.Models;
 using ControlTemplate.ViewModels;
 using ControlTemplate.Views;
 

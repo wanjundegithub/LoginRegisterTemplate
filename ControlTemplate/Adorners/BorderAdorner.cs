@@ -18,9 +18,10 @@ namespace ControlTemplate.Adorners
         {
             base.OnRender(drawingContext);
             Rect rect = new Rect(AdornedElement.RenderSize);
-            SolidColorBrush brush = new SolidColorBrush(Colors.Transparent);
-            Pen pen = new Pen(Brushes.Red, 2);
-            drawingContext.DrawRectangle(brush,pen,rect);
+            BrushConverter bc = new BrushConverter();
+            Brush adornerBrush = (Brush)bc.ConvertFrom("#FF00A0FF");
+            Pen pen = new Pen(adornerBrush, 2);
+            drawingContext.DrawRectangle(null,pen,rect);
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using ControlTemplate.ViewModels;
-using MahApps.Metro.SimpleChildWindow;
 using ReactiveUI;
-using System;
-using System.Reactive;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using System.Windows;
 
 namespace ControlTemplate.Views
@@ -14,19 +10,17 @@ namespace ControlTemplate.Views
     /// </summary>
     public partial class CustomView :IViewFor<CustomViewModel>
     {
-        public CustomView(string title,Func<object> content,IObservable<Unit> getClose)
+        public CustomView(string title,object content)
         {
             InitializeComponent();
-            ViewModel = new CustomViewModel(title, content.Invoke());
+            ViewModel = new CustomViewModel(title, content);
             this.WhenActivated(d =>
             {
                 this.Bind(ViewModel, vm => vm.Title, v => v.Title).DisposeWith(d);
-                this.Bind(ViewModel, vm => vm.Content, v => v.ViewModelViewHost_Content.ViewModel);
-                getClose.Select(u=>Unit.Default).Subscribe(u => Close(CloseReason.None)).DisposeWith(d);
+                this.Bind(ViewModel, vm => vm.Content, v => v.ViewModelViewHost_Content.ViewModel).DisposeWith(d);
             });
         }
 
-        
 
         public CustomViewModel ViewModel
         {

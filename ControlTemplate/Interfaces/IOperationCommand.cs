@@ -7,6 +7,5 @@ namespace ControlTemplate.Interfaces
     {
         ICommand Command { get; }
 
-        //IObservable<bool> CanExecute { get; }
     }
 }

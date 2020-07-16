@@ -56,16 +56,16 @@ namespace ControlTemplate.Views
             DependencyProperty.Register(nameof(ViewModel), typeof(MainViewModel), typeof(MainView));
 
 
-        public async Task ShowCustomChildWindowAsync()
-        {
-            await this.ShowChildWindowAsync(new ChildView(), OverlayFillBehavior.WindowContent);
-        }
+       
 
         public void ShowWindow()
         {
             this.Show();
         }
 
-
+        public async Task ShowCustomChildWindowAsync(string title, object content)
+        {
+            await this.ShowChildWindowAsync(new CustomView(title, content), OverlayFillBehavior.WindowContent);
+        }
     }
 }

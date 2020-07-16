@@ -7,14 +7,13 @@ namespace ControlTemplate.ViewModels
 {
     public class MainViewModel:ViewModelBase
     {
-        public MainViewModel(Lazy<IChildWindowAsyncSevice> childWindowAsyncSevice)
+        public MainViewModel(Lazy<IChildWindowAsyncSevice> childWindowAsyncSevice,Func<TestViewModel> contentModel)
         {
-            TestCommand = ReactiveCommand.Create(()=> Unit.Default);
             CloseCommand = ReactiveCommand.Create(() => Unit.Default);
-            TestCommand.Subscribe(d =>
-            {
-                childWindowAsyncSevice.Value.ShowCustomChildWindowAsync();
-            });
+            TestCommand = ReactiveCommand.CreateFromTask(() =>
+              {
+                  return childWindowAsyncSevice.Value.ShowCustomChildWindowAsync("Test", contentModel.Invoke());
+              });
         }
 
         public ReactiveCommand<Unit,Unit> TestCommand { get; }

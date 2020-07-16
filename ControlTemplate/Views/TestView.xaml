@@ -8,8 +8,19 @@
         xmlns:viewModels="clr-namespace:ControlTemplate.ViewModels"
         xmlns:local="clr-namespace:ControlTemplate.Views"
         mc:Ignorable="d"
-        Height="450" Width="800">
-    <Grid Height="100" Width="200">
-        <Label Content="Hello,world" FontSize="20" HorizontalAlignment="Center"/>
+        Width="400">
+    <Grid  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Button_Show"  Content="Show" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="TextBox_Show" Grid.Column="1" Margin="5" />
+        <Button x:Name="Button_Test" Content="Test" HorizontalAlignment="Center" Grid.Row="1" Margin="5"/>
+        <TextBox x:Name="TextBox_Test" Grid.Row="1" Grid.Column="1" Margin="5"/>
     </Grid>
 </reactiveui:ReactiveUserControl>

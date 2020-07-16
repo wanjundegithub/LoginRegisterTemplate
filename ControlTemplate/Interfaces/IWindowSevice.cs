@@ -9,6 +9,6 @@ namespace ControlTemplate.Interfaces
 
     public interface IChildWindowAsyncSevice
     {
-        Task ShowCustomChildWindowAsync();
+        Task ShowCustomChildWindowAsync(string title,object content);
     }
 }

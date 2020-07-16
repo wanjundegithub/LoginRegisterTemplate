@@ -65,7 +65,7 @@ namespace ControlTemplate.Views
 
         public async Task ShowCustomChildWindowAsync(string title,object content)
         {
-            await this.ShowChildWindowAsync(new CustomView(title,()=>content,Observable.Return(Unit.Default)), OverlayFillBehavior.WindowContent);
+            await this.ShowChildWindowAsync(new CustomView(title,content), OverlayFillBehavior.WindowContent);
         }
 
        

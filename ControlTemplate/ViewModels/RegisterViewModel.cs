@@ -49,7 +49,7 @@ namespace ControlTemplate.ViewModels
             LoginCommand = ReactiveCommand.Create(() => Unit.Default,canExecute);
             LoginCommand.Subscribe(d =>
             {
-                windowSevice.ShowWindow();
+                windowSevice.ShowCustomWindow();
             });
             RegisterCommand= ReactiveCommand.CreateFromTask(() =>
             {

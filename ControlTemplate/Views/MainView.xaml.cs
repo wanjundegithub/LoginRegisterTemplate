@@ -58,14 +58,19 @@ namespace ControlTemplate.Views
 
        
 
-        public void ShowWindow()
+        public void ShowCustomWindow()
         {
             this.Show();
         }
 
-        public async Task ShowCustomChildWindowAsync(string title, object content)
+        public async Task ShowCustomChildWindowAsync<T>(string title,  IHasObservableResult<T> content)
         {
-            await this.ShowChildWindowAsync(new CustomView(title, content), OverlayFillBehavior.WindowContent);
+            await this.ShowChildWindowAsync(new CustomView(title,content,o=>content.Result.Select(r=>Unit.Default)), OverlayFillBehavior.WindowContent);
         }
+
+        //public async Task ShowCustomChildWindowAsync(string title, object content)
+        //{
+        //    await this.ShowChildWindowAsync(new CustomView(title, content), OverlayFillBehavior.WindowContent);
+        //}
     }
 }

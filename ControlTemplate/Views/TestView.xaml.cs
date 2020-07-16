@@ -21,6 +21,7 @@ namespace ControlTemplate.Views
                 this.Bind(ViewModel, vm => vm.Show, v => v.TextBox_Show.Text).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.TestCommand, v => v.Button_Test).DisposeWith(d);
                 this.Bind(ViewModel, vm => vm.Test, v => v.TextBox_Test.Text).DisposeWith(d);
+                this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Close).DisposeWith(d);
             });
         }
 

@@ -1,14 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace ControlTemplate.Interfaces
 {
     public interface IWindowSevice
     {
-        void ShowWindow();
+        void ShowCustomWindow();
     }
 
     public interface IChildWindowAsyncSevice
     {
-        Task ShowCustomChildWindowAsync(string title,object content);
+        Task ShowCustomChildWindowAsync<T>(string title,IHasObservableResult<T> content);
+    }
+
+    public interface IHasObservableResult<T>
+    {
+        IObservable<T> Result { get; }
     }
 }

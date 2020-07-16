@@ -3,14 +3,7 @@ using System;
 using ReactiveUI;
 using System.Windows;
 using System.Reactive.Disposables;
-using ControlTemplate.Models;
-using ControlTemplate.Interfaces;
-using MahApps.Metro.Controls.Dialogs;
-using System.Threading.Tasks;
-using MahApps.Metro.SimpleChildWindow;
-using static MahApps.Metro.SimpleChildWindow.ChildWindowManager;
 using System.Reactive.Linq;
-using System.Reactive;
 
 namespace ControlTemplate.Views
 {
@@ -63,11 +56,5 @@ namespace ControlTemplate.Views
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(nameof(ViewModel), typeof(RegisterViewModel), typeof(RegisterView));
 
-        public async Task ShowCustomChildWindowAsync(string title,object content)
-        {
-            await this.ShowChildWindowAsync(new CustomView(title,content), OverlayFillBehavior.WindowContent);
-        }
-
-       
     }
 }

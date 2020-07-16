@@ -1,4 +1,8 @@
 ﻿
+using ControlTemplate.Interfaces;
+using ControlTemplate.ViewModels;
+using System.Threading.Tasks;
+
 
 namespace ControlTemplate.Views
 {
@@ -11,5 +15,6 @@ namespace ControlTemplate.Views
         {
             InitializeComponent();
         }
+
     }
 }

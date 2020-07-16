@@ -22,12 +22,13 @@ namespace ControlTemplate
             base.OnStartup(e);
             var container = new ContainerBuilder();
             container.RegisterModule<MainModule>();
-            using (var builder = container.Build())
+            var builder = container.Build();
+            using (var scope=builder.BeginLifetimeScope())
             {
                 Locator.CurrentMutable.InitializeSplat();
                 Locator.CurrentMutable.InitializeReactiveUI();
                 Locator.CurrentMutable.UseSerilogFullLogger();
-                builder.Resolve<RegisterView>().Show();
+                scope.Resolve<RegisterView>().Show();
             }
         }
     }

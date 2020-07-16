@@ -1,20 +1,18 @@
 ﻿using ControlTemplate.Interfaces;
-using ControlTemplate.Models;
 using ControlTemplate.Validations;
-using ControlTemplate.Views;
 using ReactiveUI;
 using System;
 using System.Collections;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace ControlTemplate.ViewModels
 {
     public class RegisterViewModel :ViewModelBase
     {
-        public RegisterViewModel()
+        public RegisterViewModel(IWindowSevice windowSevice)
         {
-
             this.WhenAnyValue(d => d.Password).Subscribe(s =>
             {
                 var result = Validation.TextValidation.Validate(s);
@@ -51,10 +49,15 @@ namespace ControlTemplate.ViewModels
             LoginCommand = ReactiveCommand.Create(() => Unit.Default,canExecute);
             LoginCommand.Subscribe(d =>
             {
-                //WindowManager.ShowView(nameof(MainView));
+                windowSevice.ShowWindow();
             });
-
+            RegisterCommand= ReactiveCommand.CreateFromTask(() =>
+            {
+                return Task.Delay(1000) ;
+            });
         }
+
+
         private string _account = string.Empty;
 
         public string Account
@@ -142,8 +145,10 @@ namespace ControlTemplate.ViewModels
 
         public ReactiveCommand<Unit,Unit> LoginCommand { get; }
 
+        public ReactiveCommand<Unit,Unit> RegisterCommand { get; }
+
         public IObservable<Unit> Result => LoginCommand.Select(u => Unit.Default).Merge(CloseCommand);
 
-        public ReactiveCommand<Unit,Unit> RegisterCommand { get; }
+       
     }
 }

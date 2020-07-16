@@ -1,10 +1,14 @@
-﻿using MahApps.Metro.Controls;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ControlTemplate.Interfaces
 {
     public interface IWindowSevice
     {
-        void ShowWindowAsync();
+        void ShowWindow();
+    }
+
+    public interface IChildWindowAsyncSevice
+    {
+        Task ShowCustomChildWindowAsync();
     }
 }

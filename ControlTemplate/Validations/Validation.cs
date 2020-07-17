@@ -8,9 +8,8 @@ namespace ControlTemplate.Validations
 
         public Validation()
         {
-            RuleFor(s => s).NotEmpty().WithMessage("不允许为空");
             RuleFor(s => s).MaximumLength(15).WithMessage("超过最长输入限制");
-            RuleFor(s => s).Matches(@"^[\w,_]+(\.[\w]+)?$").WithMessage("不允许非法字符");          
+            RuleFor(s => s).Matches(@"^$|^[\w,_]+(\.[\w]+)?$").WithMessage("不允许非法字符");          
         }
     }
 }

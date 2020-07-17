@@ -16,11 +16,13 @@ namespace ControlTemplate
             //由viewmodel解析出view
             Locator.CurrentMutable.Register<IViewFor<TestViewModel>>(() => new TestView());
 
+            builder.Register(c => new SignViewModel()).AsSelf();
+            builder.Register(c => new SignView()).As<IOtherWindowSevice>();
             builder.Register(c => new TestViewModel()).AsSelf(); ;
             builder.Register(c => new MainViewModel(c.Resolve<Lazy<IChildWindowAsyncSevice>>(),c.Resolve<Func<TestViewModel>>())).AsSelf();
             builder.Register(c => new MainView(c.Resolve<MainViewModel>())).As<IWindowSevice>().As<IChildWindowAsyncSevice>().AsSelf().SingleInstance();
-            builder.Register(c => new RegisterViewModel(c.Resolve<IWindowSevice>())).AsSelf().SingleInstance();
-            builder.Register(c => new RegisterView(c.Resolve<RegisterViewModel>())).AsSelf().SingleInstance();
+            builder.Register(c => new LoginViewModel(c.Resolve<IWindowSevice>(),c.Resolve<IOtherWindowSevice>())).AsSelf().SingleInstance();
+            builder.Register(c => new LoginView(c.Resolve<LoginViewModel>())).AsSelf().SingleInstance();
            
         }
     }

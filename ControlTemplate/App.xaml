@@ -10,6 +10,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <Style x:Key="Lable_Style" TargetType="Label">
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <!--<Setter Property="FontSize" Value="20"/>-->
+                <Setter Property="Foreground" Value="AliceBlue"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
             <Style x:Key="Button_Style" TargetType="Button">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="FontStyle" Value="Italic"/>

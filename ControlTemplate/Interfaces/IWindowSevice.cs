@@ -8,10 +8,15 @@ namespace ControlTemplate.Interfaces
         void ShowCustomWindow();
     }
 
+    public interface IOtherWindowSevice
+    {
+        void ShowOtherCustomWindow();
+    }
     public interface IChildWindowAsyncSevice
     {
         Task ShowCustomChildWindowAsync<T>(string title,IHasObservableResult<T> content);
     }
+
 
     public interface IHasObservableResult<T>
     {

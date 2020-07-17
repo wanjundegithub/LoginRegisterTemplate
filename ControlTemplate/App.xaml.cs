@@ -28,7 +28,7 @@ namespace ControlTemplate
                 Locator.CurrentMutable.InitializeSplat();
                 Locator.CurrentMutable.InitializeReactiveUI();
                 Locator.CurrentMutable.UseSerilogFullLogger();
-                scope.Resolve<RegisterView>().Show();
+                scope.Resolve<LoginView>().Show();
             }
         }
     }

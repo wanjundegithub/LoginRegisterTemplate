@@ -1,0 +1,64 @@
+﻿<controls:MetroWindow x:Class="ControlTemplate.Views.SignView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:ControlTemplate.Behaviors"
+        xmlns:local="clr-namespace:ControlTemplate.Views"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        ShowCloseButton="False"
+        ResizeMode="NoResize"  WindowState="Normal"
+        Title="Register" Height="450  " Width="800">
+    <controls:MetroWindow.Background>
+        <ImageBrush ImageSource="../Resources/RegisterBackground.jpg"   Stretch="Fill"/>
+    </controls:MetroWindow.Background>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="2">
+            <Label Content="WelCome Register"  Style="{StaticResource Lable_Style}" FontSize="40"/>
+        </Grid>
+        <Label Content="RegisterAccount" Style="{StaticResource Lable_Style}" FontSize="18" Grid.Row="1"/>
+        <TextBox Grid.Row="1" x:Name="TextBox_RegisterAccount" Grid.Column="1" Style="{StaticResource TextBox_Style}">
+            <i:Interaction.Behaviors>
+                <behaviors:ShowErrorsBehavior x:Name="ShowErrorsBehavior_RegisterAccount"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label Grid.Row="2" Content="RegisterPassword" Style="{StaticResource Lable_Style}" FontSize="18"/>
+        <PasswordBox x:Name="TextBox_RegisterPassword" Style="{StaticResource PasswordBox_Style}" Grid.Row="2" Grid.Column="1">
+            <i:Interaction.Behaviors>
+                <behaviors:ShowErrorsBehavior x:Name="ShowErrorsBehavior_RegisterPassword"/>
+                <behaviors:PasswordBehavior x:Name="PasswordBehavior_RegisterPassword"/>
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        <Label Content="RegisterConfimPassword" Grid.Row="3" Style="{StaticResource Lable_Style}" FontSize="18"/>
+        <PasswordBox x:Name="TextBox_RegisterConfirmPassword" Style="{StaticResource PasswordBox_Style}" Grid.Row="3" Grid.Column="1">
+            <i:Interaction.Behaviors>
+                <behaviors:ShowErrorsBehavior x:Name="ShowErrorsBehavior_RegisterComfirmPassword"/>
+                <behaviors:PasswordBehavior x:Name="PasswordBehavior_RegisterComfirmPassword"/>
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Button_Register" Content="Register" Style="{StaticResource Button_Style}"/>
+            <Button x:Name="Button_Close" Content="Close" Grid.Column="1" Style="{StaticResource Button_Style}"/>
+        </Grid>
+    </Grid>
+</controls:MetroWindow>

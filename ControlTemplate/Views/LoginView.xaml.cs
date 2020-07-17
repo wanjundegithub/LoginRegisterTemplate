@@ -10,9 +10,9 @@ namespace ControlTemplate.Views
     /// <summary>
     /// Interaction logic for RegisterView.xaml
     /// </summary>
-    public partial class RegisterView :IViewFor<RegisterViewModel>
+    public partial class LoginView :IViewFor<LoginViewModel>
     {
-        public RegisterView(RegisterViewModel viewModel)
+        public LoginView(LoginViewModel viewModel)
         {
            
             InitializeComponent();
@@ -43,18 +43,18 @@ namespace ControlTemplate.Views
             }
             set
             {
-                ViewModel = (RegisterViewModel)value;
+                ViewModel = (LoginViewModel)value;
             }
         }
 
-        public RegisterViewModel ViewModel
+        public LoginViewModel ViewModel
         {
-            get { return (RegisterViewModel)GetValue(ViewModelProperty); }
+            get { return (LoginViewModel)GetValue(ViewModelProperty); }
             set { SetValue(ViewModelProperty, value); }
         }
 
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register(nameof(ViewModel), typeof(RegisterViewModel), typeof(RegisterView));
+            DependencyProperty.Register(nameof(ViewModel), typeof(LoginViewModel), typeof(LoginView));
 
     }
 }

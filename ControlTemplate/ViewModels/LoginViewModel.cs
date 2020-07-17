@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ControlTemplate.ViewModels
 {
-    public class RegisterViewModel :ViewModelBase
+    public class LoginViewModel :ViewModelBase
     {
-        public RegisterViewModel(IWindowSevice windowSevice)
+        public LoginViewModel(IWindowSevice windowSevice,IOtherWindowSevice otherWindowSevice)
         {
             this.WhenAnyValue(d => d.Password).Subscribe(s =>
             {
@@ -41,7 +41,7 @@ namespace ControlTemplate.ViewModels
             {
                 var accountResult = Validation.TextValidation.Validate(account);
                 var passwordResult = Validation.TextValidation.Validate(password);
-                if (accountResult.IsValid && passwordResult.IsValid)
+                if (accountResult.IsValid && passwordResult.IsValid&&!string.IsNullOrEmpty(account)&&!string.IsNullOrEmpty(password))
                     return true;
                 return false;
             });
@@ -51,9 +51,10 @@ namespace ControlTemplate.ViewModels
             {
                 windowSevice.ShowCustomWindow();
             });
-            RegisterCommand= ReactiveCommand.CreateFromTask(() =>
+            RegisterCommand = ReactiveCommand.Create(() => Unit.Default);
+            RegisterCommand.Subscribe(d =>
             {
-                return Task.Delay(1000) ;
+                otherWindowSevice.ShowOtherCustomWindow();
             });
         }
 

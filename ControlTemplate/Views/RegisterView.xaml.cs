@@ -1,5 +1,6 @@
 ﻿using ControlTemplate.Interfaces;
 using ControlTemplate.ViewModels;
+using MahApps.Metro.Controls.Dialogs;
 using ReactiveUI;
 using System;
 using System.Reactive.Disposables;
@@ -10,13 +11,13 @@ namespace ControlTemplate.Views
     /// <summary>
     /// Sign.xaml 的交互逻辑
     /// </summary>
-    public partial class SignView :IViewFor<SignViewModel>,IOtherWindowSevice
+    public partial class RegisterView :IViewFor<RegisterViewModel>,IOtherWindowSevice
     { 
-        public SignView()
+        public RegisterView()
         {
             InitializeComponent();
             Closed+=new EventHandler(SignViewClosed);
-            ViewModel = new SignViewModel();
+            ViewModel = new RegisterViewModel();
             this.WhenActivated(d =>
             {
                 this.Bind(ViewModel, vm => vm.RegisterAccount, v => v.TextBox_RegisterAccount.Text).DisposeWith(d);
@@ -27,18 +28,28 @@ namespace ControlTemplate.Views
                 this.OneWayBind(ViewModel, vm => vm.RegisterComfirmPasswordError, v => v.ShowErrorsBehavior_RegisterComfirmPassword.Errors).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.RegisterCommand, v => v.Button_Register).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Close).DisposeWith(d);
-                ViewModel.Result.Subscribe(d => Close()).DisposeWith(d);
+                ViewModel.Result.Subscribe(d=>
+                {
+                    if(d)
+                    {
+                        Close();
+                    }
+                    else
+                    {
+                        DialogManager.ShowMessageAsync(this, "错误", "已存在相同用户名");
+                    }
+                }).DisposeWith(d);
             });
         }
 
-        private static SignView _instance;
+        private static RegisterView _instance;
 
-        public static SignView Instance
+        public static RegisterView Instance
         {
             get
             {
                 if (_instance == null)
-                    return new SignView();
+                    return new RegisterView();
                 return _instance;
             }
         }
@@ -52,18 +63,18 @@ namespace ControlTemplate.Views
             }
             set
             {
-                ViewModel = (SignViewModel)value;
+                ViewModel = (RegisterViewModel)value;
             }
         }
 
-        public SignViewModel ViewModel
+        public RegisterViewModel ViewModel
         {
-            get { return (SignViewModel)GetValue(ViewModelProperty); }
+            get { return (RegisterViewModel)GetValue(ViewModelProperty); }
             set { SetValue(ViewModelProperty, value); }
         }
 
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register(nameof(ViewModel), typeof(SignViewModel), typeof(SignView));
+            DependencyProperty.Register(nameof(ViewModel), typeof(RegisterViewModel), typeof(RegisterView));
 
         public void ShowOtherCustomWindow()
         {

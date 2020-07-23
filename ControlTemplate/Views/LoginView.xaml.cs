@@ -4,6 +4,7 @@ using ReactiveUI;
 using System.Windows;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace ControlTemplate.Views
 {
@@ -18,7 +19,17 @@ namespace ControlTemplate.Views
             InitializeComponent();
             viewModel.Result.Subscribe(d =>
             {
-                Close();
+                if (d)
+                {
+                    Close();
+                }
+            });
+            viewModel.LoginCommand.Subscribe(d =>
+            {
+                if(!d)
+                {
+                    DialogManager.ShowMessageAsync(this,"错误", "用户名或密码错误");
+                }
             });
             ViewModel = viewModel;
             this.WhenActivated(d =>

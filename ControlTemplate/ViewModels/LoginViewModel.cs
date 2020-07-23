@@ -1,17 +1,17 @@
 ﻿using ControlTemplate.Interfaces;
+using ControlTemplate.Models;
 using ControlTemplate.Validations;
 using ReactiveUI;
 using System;
 using System.Collections;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 
 namespace ControlTemplate.ViewModels
 {
     public class LoginViewModel :ViewModelBase
     {
-        public LoginViewModel(IWindowSevice windowSevice,IOtherWindowSevice otherWindowSevice)
+        public LoginViewModel(IWindowSevice windowSevice/*,IOtherWindowSevice otherWindowSevice*/)
         {
             this.WhenAnyValue(d => d.Password).Subscribe(s =>
             {
@@ -45,16 +45,26 @@ namespace ControlTemplate.ViewModels
                     return true;
                 return false;
             });
-            CloseCommand = ReactiveCommand.Create(() => Unit.Default);
-            LoginCommand = ReactiveCommand.Create(() => Unit.Default,canExecute);
+            CloseCommand = ReactiveCommand.Create(() =>
+            {
+                return true;
+            });
+            LoginCommand = ReactiveCommand.Create(() =>
+            {
+                ILoginData login = new LoginData(Help.Path);
+                if(!login.ValidateUser(Account,Password))
+                    return false;
+                return true;
+            },canExecute);
             LoginCommand.Subscribe(d =>
             {
-                windowSevice.ShowCustomWindow();
+                if (d)
+                    windowSevice.ShowCustomWindow();     
             });
             RegisterCommand = ReactiveCommand.Create(() => Unit.Default);
             RegisterCommand.Subscribe(d =>
             {
-                otherWindowSevice.ShowOtherCustomWindow();
+                //otherWindowSevice.ShowOtherCustomWindow();
             });
         }
 
@@ -142,13 +152,14 @@ namespace ControlTemplate.ViewModels
                 this.RaiseAndSetIfChanged(ref _isRightPasswordBorder, value);
             }
         }
-        public ReactiveCommand<Unit,Unit> CloseCommand { get; }
+        public ReactiveCommand<Unit,bool> CloseCommand { get; }
 
-        public ReactiveCommand<Unit,Unit> LoginCommand { get; }
+        public ReactiveCommand<Unit,bool> LoginCommand { get; }
 
         public ReactiveCommand<Unit,Unit> RegisterCommand { get; }
 
-        public IObservable<Unit> Result => LoginCommand.Select(u => Unit.Default).Merge(CloseCommand);
+        public IObservable<bool> Result => LoginCommand.Select(b => b).Merge(CloseCommand);
+
 
        
     }

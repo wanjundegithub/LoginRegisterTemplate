@@ -6,7 +6,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:ControlTemplate.Views"
         mc:Ignorable="d"
-        Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

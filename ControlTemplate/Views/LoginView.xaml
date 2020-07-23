@@ -52,10 +52,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Button_Login" Content="Login" Style="{StaticResource Button_Style}" />
+            <Button x:Name="Button_Login" Content="Login" Style="{StaticResource Button_Style}" >
+                <Button.InputBindings>
+                    <!--<KeyBinding Key="Return" Command="{Binding LoginCommand}"/>-->
+                </Button.InputBindings>
+                <!--<KeyBinding Key="Return" Command="{Binding LoginCommand}"/>-->
+            </Button>
             <Button x:Name="Button_Register" Content="Register" Grid.Column="1"  Style="{StaticResource Button_Style}"/>
             <Button x:Name="Button_Exit" Content="Exit" Grid.Column="2"  Style="{StaticResource Button_Style}" />
-
         </Grid>
     </Grid>
 </controls:MetroWindow>

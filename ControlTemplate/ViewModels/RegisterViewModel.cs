@@ -1,4 +1,6 @@
-﻿using ControlTemplate.Validations;
+﻿using ControlTemplate.Interfaces;
+using ControlTemplate.Models;
+using ControlTemplate.Validations;
 using ReactiveUI;
 using System;
 using System.Collections;
@@ -7,9 +9,9 @@ using System.Reactive.Linq;
 
 namespace ControlTemplate.ViewModels
 {
-    public class SignViewModel:ViewModelBase
+    public class RegisterViewModel:ViewModelBase
     {
-        public SignViewModel()
+        public RegisterViewModel()
         {
             this.WhenAnyValue(d => d.RegisterAccount).Subscribe(d =>
               {
@@ -52,9 +54,25 @@ namespace ControlTemplate.ViewModels
                         return true;
                     return false;
                 });
-            RegisterCommand = ReactiveCommand.Create(() => Unit.Default, canExecuted);
-            CloseCommand = ReactiveCommand.Create(() => Unit.Default);
+            RegisterCommand = ReactiveCommand.Create(() =>
+            {
+                ILoginData login = new LoginData(Help.Path);
+                if(login.IsExistUser(RegisterAccount))
+                {
+                    return false;
+                }
+                else
+                {
+                    login.AddUser(RegisterAccount, RegisterPassword);
+                    return true;
+                }
+            }, canExecuted);
+            CloseCommand = ReactiveCommand.Create(() =>
+            {
+                return true;
+            });
         }
+
 
         private string _registerAccount = string.Empty;
 
@@ -140,11 +158,11 @@ namespace ControlTemplate.ViewModels
             }
         }
 
-        public ReactiveCommand<Unit,Unit> RegisterCommand { get; }
+        public ReactiveCommand<Unit,bool> RegisterCommand { get; }
 
-        public ReactiveCommand<Unit,Unit> CloseCommand { get; }
+        public ReactiveCommand<Unit,bool> CloseCommand { get; }
 
-        public IObservable<Unit> Result => CloseCommand.Select(d => Unit.Default).Merge(RegisterCommand);
+        public IObservable<bool> Result => CloseCommand.Select(d => d).Merge(RegisterCommand);
 
     }
 }

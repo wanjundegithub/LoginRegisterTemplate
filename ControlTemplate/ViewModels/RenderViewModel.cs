@@ -9,7 +9,6 @@ namespace ControlTemplate.ViewModels
     {
         public RenderViewModel(Lazy<IChildWindowAsyncSevice> childWindowAsyncSevice,Func<TestViewModel> contentModel)
         {
-            CloseCommand = ReactiveCommand.Create(() => Unit.Default);
             TestCommand = ReactiveCommand.CreateFromTask(() =>
               {
                   return childWindowAsyncSevice.Value.ShowCustomChildWindowAsync("Test", contentModel.Invoke());
@@ -18,6 +17,5 @@ namespace ControlTemplate.ViewModels
 
         public ReactiveCommand<Unit,Unit> TestCommand { get; }
 
-        public ReactiveCommand<Unit,Unit> CloseCommand { get; }
     }
 }

@@ -6,14 +6,13 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:ControlTemplate.Views"
         mc:Ignorable="d"
-        ShowCloseButton="False"
+        WindowStartupLocation="CenterScreen"    
         Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Button_Test"  Content="Test" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Button x:Name="Button_Exit" Grid.Row="1" Content="Close" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button x:Name="Button_Test"  Content="Test" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource Button_Style}"/>
     </Grid>
 </controls:MetroWindow>

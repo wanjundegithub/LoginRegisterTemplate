@@ -29,6 +29,7 @@ namespace ControlTemplate.Views
                 this.OneWayBind(ViewModel, vm => vm.IsRightPasswordBorder, v => v.BorderBehavior_Password.IsHasBorder).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Exit).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.LoginCommand, v => v.Button_Login).DisposeWith(d);
+                this.BindCommand(ViewModel, vm => vm.LoginCommand, v => v.KeyBinding_Return).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.RegisterCommand, v => v.Button_Register).DisposeWith(d);
                 ViewModel.LoginCommand.Subscribe(d =>
                 {

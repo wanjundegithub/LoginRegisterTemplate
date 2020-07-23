@@ -22,16 +22,19 @@ namespace ControlTemplate.Views
         {
             InitializeComponent();
             ViewModel = viewModel;
+            Closed += RenderView_Closed;
             this.WhenActivated(d =>
             {
                 this.BindCommand(ViewModel, vm => vm.TestCommand, v => v.Button_Test).DisposeWith(d);
-                this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Exit).DisposeWith(d);
-                viewModel.CloseCommand.Subscribe(d => Application.Current.Shutdown()).DisposeWith(d);
             });
         }
 
+        private void RenderView_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
-       object IViewFor.ViewModel
+        object IViewFor.ViewModel
         {
             get
             {

@@ -5,7 +5,6 @@ using System.Windows;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using MahApps.Metro.Controls.Dialogs;
-using ControlTemplate.Interfaces;
 
 namespace ControlTemplate.Views
 {

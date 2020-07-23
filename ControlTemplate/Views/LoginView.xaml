@@ -9,6 +9,7 @@
         xmlns:local="clr-namespace:ControlTemplate"
         mc:Ignorable="d"
         AllowsTransparency="True"
+        ShowCloseButton="False"
         Height="200" Width="500" WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
         ResizeMode="NoResize"  WindowState="Normal">

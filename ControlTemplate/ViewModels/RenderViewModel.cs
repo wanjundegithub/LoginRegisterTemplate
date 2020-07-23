@@ -5,9 +5,9 @@ using System.Reactive;
 
 namespace ControlTemplate.ViewModels
 {
-    public class MainViewModel:ViewModelBase
+    public class RenderViewModel:ViewModelBase
     {
-        public MainViewModel(Lazy<IChildWindowAsyncSevice> childWindowAsyncSevice,Func<TestViewModel> contentModel)
+        public RenderViewModel(Lazy<IChildWindowAsyncSevice> childWindowAsyncSevice,Func<TestViewModel> contentModel)
         {
             CloseCommand = ReactiveCommand.Create(() => Unit.Default);
             TestCommand = ReactiveCommand.CreateFromTask(() =>

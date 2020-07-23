@@ -16,12 +16,12 @@ namespace ControlTemplate
             //由viewmodel解析出view
             Locator.CurrentMutable.Register<IViewFor<TestViewModel>>(() => new TestView());
 
-            //builder.Register(c => new RegisterViewModel()).AsSelf();
-            //builder.Register(c => new RegisterView()).As<IOtherWindowSevice>();
+            builder.Register(c => new RegisterViewModel()).AsSelf();
+            builder.Register(c => new RegisterView()).As<IOtherWindowSevice>();
             builder.Register(c => new TestViewModel()).AsSelf(); ;
-            builder.Register(c => new MainViewModel(c.Resolve<Lazy<IChildWindowAsyncSevice>>(),c.Resolve<Func<TestViewModel>>())).AsSelf();
-            builder.Register(c => new MainView(c.Resolve<MainViewModel>())).As<IWindowSevice>().As<IChildWindowAsyncSevice>().AsSelf().SingleInstance();
-            builder.Register(c => new LoginViewModel(c.Resolve<IWindowSevice>()/*,c.Resolve<IOtherWindowSevice>()*/)).AsSelf().SingleInstance();
+            builder.Register(c => new RenderViewModel(c.Resolve<Lazy<IChildWindowAsyncSevice>>(),c.Resolve<Func<TestViewModel>>())).AsSelf();
+            builder.Register(c => new RenderView(c.Resolve<RenderViewModel>())).As<IWindowSevice>().As<IChildWindowAsyncSevice>().AsSelf().SingleInstance();
+            builder.Register(c => new LoginViewModel(c.Resolve<IWindowSevice>(), c.Resolve<IOtherWindowSevice>())).AsSelf().SingleInstance();
             builder.Register(c => new LoginView(c.Resolve<LoginViewModel>())).As<IViewFor<LoginViewModel>>().AsSelf().SingleInstance();
            
         }

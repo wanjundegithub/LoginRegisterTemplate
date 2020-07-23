@@ -5,6 +5,7 @@ using System.Windows;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using MahApps.Metro.Controls.Dialogs;
+using ControlTemplate.Interfaces;
 
 namespace ControlTemplate.Views
 {
@@ -17,20 +18,6 @@ namespace ControlTemplate.Views
         {
            
             InitializeComponent();
-            viewModel.Result.Subscribe(d =>
-            {
-                if (d)
-                {
-                    Close();
-                }
-            });
-            viewModel.LoginCommand.Subscribe(d =>
-            {
-                if(!d)
-                {
-                    DialogManager.ShowMessageAsync(this,"错误", "用户名或密码错误");
-                }
-            });
             ViewModel = viewModel;
             this.WhenActivated(d =>
             {
@@ -43,8 +30,17 @@ namespace ControlTemplate.Views
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Exit).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.LoginCommand, v => v.Button_Login).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.RegisterCommand, v => v.Button_Register).DisposeWith(d);
+                ViewModel.LoginCommand.Subscribe(d =>
+                {
+                    if (!d)
+                        DialogManager.ShowMessageAsync(this, "错误", "用户名或密码错误");
+                    else
+                        Close();
+                }).DisposeWith(d);
+                ViewModel.CloseCommand.Subscribe(d =>Application.Current.Shutdown()).DisposeWith(d);
             });
         }
+
 
         object IViewFor.ViewModel
         {
@@ -67,5 +63,6 @@ namespace ControlTemplate.Views
         public static readonly DependencyProperty ViewModelProperty =
             DependencyProperty.Register(nameof(ViewModel), typeof(LoginViewModel), typeof(LoginView));
 
+       
     }
 }

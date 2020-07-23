@@ -16,7 +16,7 @@ namespace ControlTemplate.Views
         public RegisterView()
         {
             InitializeComponent();
-            Closed+=new EventHandler(SignViewClosed);
+            //Closed+=new EventHandler(SignViewClosed);
             ViewModel = new RegisterViewModel();
             this.WhenActivated(d =>
             {
@@ -40,18 +40,6 @@ namespace ControlTemplate.Views
                     }
                 }).DisposeWith(d);
             });
-        }
-
-        private static RegisterView _instance;
-
-        public static RegisterView Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    return new RegisterView();
-                return _instance;
-            }
         }
 
 
@@ -78,13 +66,9 @@ namespace ControlTemplate.Views
 
         public void ShowOtherCustomWindow()
         {
-            Instance.Show();
+            var view = new RegisterView();
+            view.Show();
         }
 
-        private void SignViewClosed(object sender, EventArgs e)
-        {
-            _instance = null;
-            this.Close();
-        }
     }
 }

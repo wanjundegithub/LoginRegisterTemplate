@@ -15,21 +15,18 @@ namespace ControlTemplate.Views
     /// <summary>
     /// MainView.xaml 的交互逻辑
     /// </summary>
-    public partial class MainView :IViewFor<MainViewModel>, IWindowSevice,IChildWindowAsyncSevice
+    public partial class RenderView :IViewFor<RenderViewModel>, IWindowSevice,IChildWindowAsyncSevice
     {
         
-        public MainView(MainViewModel viewModel)
+        public RenderView(RenderViewModel viewModel)
         {
             InitializeComponent();
-            viewModel.CloseCommand.Subscribe(d =>  
-            {
-                Close();
-            });
             ViewModel = viewModel;
             this.WhenActivated(d =>
             {
                 this.BindCommand(ViewModel, vm => vm.TestCommand, v => v.Button_Test).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Exit).DisposeWith(d);
+                viewModel.CloseCommand.Subscribe(d => Application.Current.Shutdown()).DisposeWith(d);
             });
         }
 
@@ -42,18 +39,18 @@ namespace ControlTemplate.Views
             }
             set
             {
-                ViewModel = (MainViewModel)value;
+                ViewModel = (RenderViewModel)value;
             }
         }
 
-        public MainViewModel ViewModel
+        public RenderViewModel ViewModel
         {
-            get { return (MainViewModel)GetValue(ViewModelProperty); }
+            get { return (RenderViewModel)GetValue(ViewModelProperty); }
             set { SetValue(ViewModelProperty, value); }
         }
 
         public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register(nameof(ViewModel), typeof(MainViewModel), typeof(MainView));
+            DependencyProperty.Register(nameof(ViewModel), typeof(RenderViewModel), typeof(RenderView));
 
 
        

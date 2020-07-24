@@ -69,5 +69,28 @@ namespace ControlTemplate.Models
             return true;
 
         }
+
+        bool ILoginData.DeleteUser(string name)
+        {
+            if (!File.Exists(_path))
+                return false;
+            if (!_users.ContainsKey(name))
+                return false;
+            _users.Remove(name);
+            StringBuilder stringBuilder ;
+            using(StreamWriter sw=new StreamWriter(_path,false,Encoding.Default))
+            {
+                foreach(var user in _users)
+                {
+                    stringBuilder = new StringBuilder();
+                    stringBuilder.Append(user.Key);
+                    stringBuilder.Append(",");
+                    var encodePassword = EncryptionAndDecryption.Encrypt(user.Value);
+                    stringBuilder.Append(encodePassword);
+                    sw.WriteLine(stringBuilder);
+                }
+            }
+            return true;
+        }
     }
 }

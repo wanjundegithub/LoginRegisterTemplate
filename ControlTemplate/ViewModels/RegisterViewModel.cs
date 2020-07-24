@@ -54,25 +54,33 @@ namespace ControlTemplate.ViewModels
                         return true;
                     return false;
                 });
+            _login = new LoginData(Help.Path);
             RegisterCommand = ReactiveCommand.Create(() =>
             {
-                ILoginData login = new LoginData(Help.Path);
-                if(login.IsExistUser(RegisterAccount))
+                if(_login.IsExistUser(RegisterAccount))
                 {
                     return false;
                 }
                 else
                 {
-                    login.AddUser(RegisterAccount, RegisterPassword);
+                    _login.AddUser(RegisterAccount, RegisterPassword);
                     return true;
                 }
             }, canExecuted);
+            //测试专用
+            DeleteCommand = ReactiveCommand.Create<string,bool>(s =>
+              {
+                  if (_login.DeleteUser(s))
+                      return true;
+                  return false;
+              });
             CloseCommand = ReactiveCommand.Create(() =>
             {
                 return true;
             });
         }
 
+        private ILoginData _login { get; set; }
 
         private string _registerAccount = string.Empty;
 
@@ -161,6 +169,8 @@ namespace ControlTemplate.ViewModels
         public ReactiveCommand<Unit,bool> RegisterCommand { get; }
 
         public ReactiveCommand<Unit,bool> CloseCommand { get; }
+
+        public ReactiveCommand<string,bool> DeleteCommand { get; }
 
         public IObservable<bool> Result => CloseCommand.Select(d => d).Merge(RegisterCommand);
 

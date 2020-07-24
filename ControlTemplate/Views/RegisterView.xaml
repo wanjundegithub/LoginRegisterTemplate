@@ -56,9 +56,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="Button_Register" Content="Register" Style="{StaticResource Button_Style}"/>
-            <Button x:Name="Button_Close" Content="Close" Grid.Column="1" Style="{StaticResource Button_Style}"/>
+            <Button x:Name="Button_Delete" Grid.Column="1" Content="Delete" Style="{StaticResource Button_Style}"
+                  />
+            <Button x:Name="Button_Close" Content="Close" Grid.Column="2" Style="{StaticResource Button_Style}"/>
         </Grid>
     </Grid>
 </controls:MetroWindow>

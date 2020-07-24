@@ -16,7 +16,6 @@ namespace ControlTemplate.Views
         public RegisterView()
         {
             InitializeComponent();
-            //Closed+=new EventHandler(SignViewClosed);
             ViewModel = new RegisterViewModel();
             this.WhenActivated(d =>
             {
@@ -27,6 +26,7 @@ namespace ControlTemplate.Views
                 this.OneWayBind(ViewModel, vm => vm.RegisterPasswordError, v => v.ShowErrorsBehavior_RegisterPassword.Errors).DisposeWith(d);
                 this.OneWayBind(ViewModel, vm => vm.RegisterComfirmPasswordError, v => v.ShowErrorsBehavior_RegisterComfirmPassword.Errors).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.RegisterCommand, v => v.Button_Register).DisposeWith(d);
+                this.BindCommand(ViewModel, vm => vm.DeleteCommand, v => v.Button_Delete, vm=>vm.RegisterAccount).DisposeWith(d);
                 this.BindCommand(ViewModel, vm => vm.CloseCommand, v => v.Button_Close).DisposeWith(d);
                 ViewModel.Result.Subscribe(d=>
                 {
@@ -39,6 +39,13 @@ namespace ControlTemplate.Views
                         DialogManager.ShowMessageAsync(this, "错误", "已存在相同用户名");
                     }
                 }).DisposeWith(d);
+                ViewModel.DeleteCommand.Subscribe(d =>
+                {
+                    if (d)
+                        DialogManager.ShowMessageAsync(this, "", "已成功删除用户");
+                    else
+                        DialogManager.ShowMessageAsync(this, "错误", "无法删除不存在的用户");
+                });
             });
         }
 
